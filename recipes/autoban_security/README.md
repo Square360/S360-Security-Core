@@ -29,7 +29,13 @@ This recipe installs and configures comprehensive autoban security rules for Dru
 
 ## Installation
 
-### Using Drush
+### Using Lando + Drush
+
+```bash
+lando drush recipe /app/web/modules/contrib/s360_security_core/recipes/autoban_security/
+```
+
+### Using Drush (without Lando)
 
 ```bash
 drush recipe web/modules/contrib/s360_security_core/recipes/autoban_security
@@ -88,6 +94,14 @@ After applying this recipe:
 - Whitelist trusted IPs in autoban settings to prevent false positives
 
 ## Troubleshooting
+
+**Issue**: Error about `/app/web/modules/custom/yh_security/yh_security.module` not found
+- **Cause**: Database has cached references to the old module name
+- **Solution**: Clear Drupal cache:
+  ```bash
+  lando drush cr
+  ```
+  Then try running the recipe again.
 
 **Issue**: Legitimate IPs getting banned
 - **Solution**: Add to whitelist at `/admin/config/people/autoban/settings`

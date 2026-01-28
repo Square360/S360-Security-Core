@@ -58,7 +58,10 @@ This module requires the following modules:
 Install via the included recipe that handles all dependencies and configurations:
 
 ```bash
-# Using Drush
+# Using Lando + Drush
+lando drush recipe /app/web/modules/contrib/s360_security_core/recipes/autoban_security/
+
+# Or using Drush (without Lando)
 drush recipe recipes/autoban_security
 
 # Or using Drupal core's recipe command (Drupal 10.3+)
@@ -131,7 +134,11 @@ drush en s360_security_core -y
 **Important:** After enabling, run the recipe to activate security rules:
 
 ```bash
-drush recipe recipes/autoban_security
+# Using Lando
+lando drush recipe /app/web/modules/contrib/s360_security_core/recipes/autoban_security/
+
+# Without Lando
+drush recipe web/modules/contrib/s360_security_core/recipes/autoban_security
 ```
 
 ## Troubleshooting
@@ -186,7 +193,7 @@ This approach was selected for:
 #### Technical Architecture
 
 **Integration Point:**
-- Event subscriber in yh_security module
+- Event subscriber in s360_security_core module
 - Intercepts ban events before `AdvbanIpManager::banIp()` execution
 - Query ban history: `SELECT COUNT(*) FROM advban_ip WHERE ip = :ip AND reason LIKE 'autoban:%'`
 
