@@ -1,0 +1,29 @@
+name: 'S360 Autoban Security'
+description: 'Installs and configures autoban security rules to protect against common web attacks including WordPress scans, environment file access, git directory exposure, shell uploads, and more.'
+type: 'Security'
+recipes:
+  # No parent recipes needed
+
+install:
+  # Install required contrib modules
+  - advban:advban
+  - autoban:autoban
+  - autoban:autoban_advban
+  - autoban:autoban_dblog
+
+# config:
+#   # Import all autoban and advban configurations
+#   import:
+#     s360_security_core:
+#       - advban.settings
+#       - autoban.settings
+#       - autoban.autoban.backup_scan
+#       - autoban.autoban.config_scan
+#       - autoban.autoban.env_file_scan
+#       - autoban.autoban.git_scan
+#       - autoban.autoban.joomla_scan
+#       - autoban.autoban.php_scan
+#       - autoban.autoban.phpmyadmin_scan
+#       - autoban.autoban.shell_scan
+#       - autoban.autoban.wordpress_scan
+#       - autoban.autoban.xmlrpc_attack

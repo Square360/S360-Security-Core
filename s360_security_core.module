@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * S360 Security Core module file.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function s360_security_core_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.s360_security_core':
+      $output = '<h2>' . t('About') . '</h2>';
+      $output .= '<p>' . t('The S360 Security Core module provides comprehensive security configurations including automated IP banning rules to protect against common web attacks.') . '</p>';
+      $output .= '<h3>' . t('Features') . '</h3>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('10 preconfigured autoban rules targeting common attack patterns') . '</li>';
+      $output .= '<li>' . t('Protection against WordPress, Joomla, and PHP vulnerability scans') . '</li>';
+      $output .= '<li>' . t('Critical file protection (.env, .git, backups, config files)') . '</li>';
+      $output .= '<li>' . t('Webshell and backdoor upload protection') . '</li>';
+      $output .= '<li>' . t('XML-RPC brute force protection') . '</li>';
+      $output .= '<li>' . t('Database admin tool access protection (phpMyAdmin, Adminer)') . '</li>';
+      $output .= '<li>' . t('IP range banning to block entire malicious networks') . '</li>';
+      $output .= '</ul>';
+      $output .= '<h3>' . t('Configuration') . '</h3>';
+      $output .= '<p>' . t('Manage autoban rules at <a href=":autoban">Autoban configuration</a>.', [
+        ':autoban' => '/admin/config/people/autoban',
+      ]) . '</p>';
+      $output .= '<p>' . t('View and manage banned IPs at <a href=":advban">Advanced Ban</a>.', [
+        ':advban' => '/admin/config/people/advban',
+      ]) . '</p>';
+      $output .= '<h3>' . t('Monitoring') . '</h3>';
+      $output .= '<p>' . t('Monitor autoban activity in the <a href=":logs">Recent log messages</a> or use Drush:') . '</p>';
+      $output .= '<code>drush watchdog:show --type=autoban --count=50</code>';
+      $output .= '<p>' . t('For more information, see the <a href=":readme">module README</a>.', [
+        ':readme' => '/' . \Drupal::service('extension.list.module')->getPath('s360_security_core') . '/README.md',
+      ]) . '</p>';
+      return $output;
+  }
+
+  return '';
+}

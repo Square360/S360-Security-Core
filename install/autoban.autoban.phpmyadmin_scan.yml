@@ -1,0 +1,13 @@
+id: phpmyadmin_scan
+uuid: 1d6f7e5d-4e8f-4b2d-9a6f-0f1a5b4d9e7c
+type: 'page not found'
+message: '.*phpmyadmin|.*pma|.*myadmin|.*adminer|.*mysql'
+referer: ''
+threshold: '2'
+window: none
+provider: advban_range
+user_type: '1'
+rule_type: 1
+langcode: en
+status: true
+dependencies: {  }

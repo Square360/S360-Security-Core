@@ -1,0 +1,13 @@
+id: backup_scan
+uuid: 2e7f8e6d-5f9a-4b3e-9a7a-1a2b6c5e0f8d
+type: 'page not found'
+message: '.*backup.*|.*dump.*|.*\\.sql'
+referer: ''
+threshold: '2'
+window: none
+provider: advban_range
+user_type: '1'
+rule_type: 1
+langcode: en
+status: true
+dependencies: {  }

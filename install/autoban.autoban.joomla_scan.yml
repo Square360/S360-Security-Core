@@ -1,0 +1,13 @@
+id: joomla_scan
+uuid: 8a3f4e2d-1b5c-4d9a-9f3e-7c8d2e1a6b4f
+type: 'page not found'
+message: '/administrator'
+referer: ''
+threshold: '2'
+window: none
+provider: advban_range
+user_type: '1'
+rule_type: 1
+langcode: en
+status: true
+dependencies: {  }

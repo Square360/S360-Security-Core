@@ -1,0 +1,11 @@
+# S360 Security Core
+
+Comprehensive security module for Drupal sites.
+
+## Contributing
+
+Pull requests are welcome. Please follow Drupal coding standards.
+
+## License
+
+GPL-2.0-or-later

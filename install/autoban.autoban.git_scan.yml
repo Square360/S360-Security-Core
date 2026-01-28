@@ -1,0 +1,13 @@
+id: git_scan
+uuid: 0c5f6e4d-3d7e-4f1c-8f5e-9e0f4a3c8d6b
+type: 'page not found'
+message: '/\.git'
+referer: ''
+threshold: '1'
+window: none
+provider: advban_range
+user_type: '1'
+rule_type: 1
+langcode: en
+status: true
+dependencies: {  }

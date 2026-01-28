@@ -1,0 +1,13 @@
+id: shell_scan
+uuid: 4a9f0a8f-7a1e-4b5a-8b9e-3a4b8a7f2a0c
+type: 'page not found'
+message: '.*shell\.php|.*c99\.php|.*r57\.php|.*backdoor\.php|.*webshell\.php|.*cmd\.php'
+referer: ''
+threshold: '1'
+window: none
+provider: advban_range
+user_type: '1'
+rule_type: 1
+langcode: en
+status: true
+dependencies: {  }

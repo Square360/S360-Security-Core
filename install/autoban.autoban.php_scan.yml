@@ -1,0 +1,13 @@
+id: php_scan
+uuid: 194f167c-dc77-4cb9-840f-6dc2927a70db
+type: 'page not found'
+message: '.*\.php'
+referer: ''
+threshold: '2'
+window: none
+provider: advban_range
+user_type: '1'
+rule_type: 1
+langcode: en
+status: true
+dependencies: {  }

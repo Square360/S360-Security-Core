@@ -1,0 +1,118 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for S360 Security Core module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function s360_security_core_install() {
+  $messenger = \Drupal::messenger();
+
+  // Check if any autoban rules are already configured.
+  $config_factory = \Drupal::configFactory();
+  $autoban_rules = $config_factory->listAll('autoban.autoban.');
+
+  if (empty($autoban_rules)) {
+    // No rules found - remind developer to run the recipe.
+    $messenger->addWarning(t('<strong>Action Required:</strong> To activate security protection, run the autoban security recipe:'));
+    $messenger->addWarning(t('<code>drush recipe recipes/autoban_security</code>'));
+    $messenger->addWarning(t('Or manually import the configuration from the <em>install</em> directory.'));
+  }
+  else {
+    // Rules already configured.
+    $messenger->addStatus(t('S360 Security Core module has been installed with @count autoban rules active.', [
+      '@count' => count($autoban_rules),
+    ]));
+  }
+
+  $messenger->addStatus(t('Review autoban rules at <a href=":url">Autoban configuration</a>.', [
+    ':url' => '/admin/config/people/autoban',
+  ]));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function s360_security_core_uninstall() {
+  \Drupal::messenger()->addStatus(t('S360 Security Core module has been uninstalled. Autoban rules have been removed.'));
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function s360_security_core_requirements($phase) {
+  $requirements = [];
+
+  if ($phase == 'runtime') {
+    $module_handler = \Drupal::moduleHandler();
+
+    // Check if autoban is enabled.
+    if (!$module_handler->moduleExists('autoban')) {
+      $requirements['s360_security_core_autoban'] = [
+        'title' => t('S360 Security Core: Autoban'),
+        'value' => t('Not installed'),
+        'description' => t('The Autoban module is required for S360 Security Core to function properly.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+
+    // Check if advban is enabled.
+    if (!$module_handler->moduleExists('advban')) {
+      $requirements['s360_security_core_advban'] = [
+        'title' => t('S360 Security Core: Advanced Ban'),
+        'value' => t('Not installed'),
+        'description' => t('The Advanced Ban module is required for IP range banning functionality.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+
+    // Check if autoban rules are configured.
+    if ($module_handler->moduleExists('autoban')) {
+      $config_factory = \Drupal::configFactory();
+      $autoban_rules = $config_factory->listAll('autoban.autoban.');
+      $rule_count = count($autoban_rules);
+
+      if ($rule_count > 0) {
+        $requirements['s360_security_core_rules'] = [
+          'title' => t('S360 Security Core: Autoban Rules'),
+          'value' => \Drupal::translation()->formatPlural(
+            $rule_count,
+            '1 rule configured',
+            '@count rules configured'
+          ),
+          'severity' => REQUIREMENT_OK,
+        ];
+      }
+      else {
+        $requirements['s360_security_core_rules'] = [
+          'title' => t('S360 Security Core: Autoban Rules'),
+          'value' => t('No rules configured'),
+          'description' => t('No autoban rules have been configured. Security protection is not active.'),
+          'severity' => REQUIREMENT_WARNING,
+        ];
+      }
+    }
+
+    // Check if cron is running regularly.
+    $cron_last = \Drupal::state()->get('system.cron_last');
+    if ($cron_last) {
+      $interval = \Drupal::time()->getRequestTime() - $cron_last;
+      // Warn if cron hasn't run in over 24 hours.
+      if ($interval > 86400) {
+        $requirements['s360_security_core_cron'] = [
+          'title' => t('S360 Security Core: Cron'),
+          'value' => t('Last run: @time ago', [
+            '@time' => \Drupal::service('date.formatter')->formatInterval($interval),
+          ]),
+          'description' => t('Autoban rules are checked during cron runs. Ensure cron is running regularly for optimal security protection.'),
+          'severity' => REQUIREMENT_WARNING,
+        ];
+      }
+    }
+  }
+
+  return $requirements;
+}
