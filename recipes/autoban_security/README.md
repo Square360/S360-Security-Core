@@ -32,13 +32,13 @@ This recipe installs and configures comprehensive autoban security rules for Dru
 ### Using Drush
 
 ```bash
-drush recipe web/modules/custom/s360_security_core/recipes/autoban_security
+drush recipe web/modules/contrib/s360_security_core/recipes/autoban_security
 ```
 
 ### Using Drupal Core (Drupal 10.3+)
 
 ```bash
-php web/core/scripts/drupal recipe web/modules/custom/s360_security_core/recipes/autoban_security
+php web/core/scripts/drupal recipe web/modules/contrib/s360_security_core/recipes/autoban_security
 ```
 
 ## Post-Installation

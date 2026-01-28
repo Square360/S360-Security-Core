@@ -72,7 +72,7 @@ php core/scripts/drupal recipe recipes/autoban_security
 drush en s360_security_core -y
 
 # Import configurations
-drush config:import --partial --source=modules/custom/s360_security_core/config/install
+drush config:import --partial --source=modules/contrib/s360_security_core/config/install
 ```
 
 ## Dependencies

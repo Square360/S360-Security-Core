@@ -11,19 +11,20 @@ install:
   - autoban:autoban_advban
   - autoban:autoban_dblog
 
-# config:
-#   # Import all autoban and advban configurations
-#   import:
-#     s360_security_core:
-#       - advban.settings
-#       - autoban.settings
-#       - autoban.autoban.backup_scan
-#       - autoban.autoban.config_scan
-#       - autoban.autoban.env_file_scan
-#       - autoban.autoban.git_scan
-#       - autoban.autoban.joomla_scan
-#       - autoban.autoban.php_scan
-#       - autoban.autoban.phpmyadmin_scan
-#       - autoban.autoban.shell_scan
-#       - autoban.autoban.wordpress_scan
-#       - autoban.autoban.xmlrpc_attack
+config:
+  # Import all autoban and advban configurations
+  strict: false
+  import:
+    s360_security_core:
+      - advban.settings
+      - autoban.settings
+      - autoban.autoban.backup_scan
+      - autoban.autoban.config_scan
+      - autoban.autoban.env_file_scan
+      - autoban.autoban.git_scan
+      - autoban.autoban.joomla_scan
+      - autoban.autoban.php_scan
+      - autoban.autoban.phpmyadmin_scan
+      - autoban.autoban.shell_scan
+      - autoban.autoban.wordpress_scan
+      - autoban.autoban.xmlrpc_attack
